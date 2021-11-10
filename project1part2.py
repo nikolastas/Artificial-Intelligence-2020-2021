@@ -41,11 +41,11 @@ class Pathfinder:
         #self.vis.create_gif()
         while openset:
             
-            #self.vis.draw_step(maze, Pathfinder.sm2list(openset), Pathfinder.sm2list(closedset))
+            self.vis.draw_step(maze, Pathfinder.sm2list(openset), Pathfinder.sm2list(closedset))
             
             
             
-            #ani=self.vis.create_gif()
+            self.vis.create_gif()
             
             
             
@@ -183,11 +183,11 @@ def all_cost_0(a,b):
 def euclidean(a,b):
   return math.sqrt(math.pow((a[0]-b[0]),2)+math.pow((a[1]-b[1]),2))
 ## Create a 41x41 maze
-N = 20
+"""N = 20
 S = (2, 2)
 F = (18, 12)
 maze = project1part1.Maze(N, S, F)
 ## Find and visualize the path
 
 pf = Pathfinder(maze=maze, c = all_cost_1, h = manhatan)
-maze.draw_map(pf.get_path())
+maze.draw_map(pf.get_path())"""
