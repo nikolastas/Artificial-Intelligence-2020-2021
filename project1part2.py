@@ -69,36 +69,17 @@ class Pathfinder:
             if (curent==None):
                 #print("Path does not exist!")
                 break
-            else:
+            
                 #print("current is ", curent)
-                openset.remove(curent)
-                closedset.add(curent)
+                
             
             
             #Add it to the closed set
             #print("curent=",curent," has child ",Pathfinder.next_neightbours(maze, N, curent))
             #Loop through the node's children/siblings
             for node in Pathfinder.next_neightbours(maze, N, curent):
-                #If it is already in the closed set, skip it
-                if node in closedset:
-                    continue
-                #Otherwise if it is already in the open set
-                if node in openset:
-                    #Check if we beat the G score
-                    (x,y)=node 
-                    
-                    new_f = gcost[curent] + self.cost(curent,node) + self.heuristic(node,maze.F)
-                    
-                    if fcost[node] > new_f:
-                        #If so, update the node to have a new parent
-                        del fcost[node]
-                        fcost[node] = new_f
-                        del gcost[node]
-                        gcost[node]=gcost[curent] + self.cost(curent,node)
-                        del cameFrom[node]
-                        cameFrom[node]=curent
-                else :
-                    #If it isn't in the open set, calculate the G and H score for the node
+                if node not in closedset and node not in openset :
+                    #If it isn't in the open nor the closed set, calculate the G and H score for the node
                     #node.G = current.G + current.move_cost(node)
                     (x,y)=node
                     
@@ -112,11 +93,29 @@ class Pathfinder:
                     
                     #Add it to the set
                     openset.add(node)
+                
+                else:
+                    #Check if we beat the G score
+                    (x,y)=node 
+                    
+                    new_f = gcost[curent] + self.cost(curent,node) + self.heuristic(node,maze.F)
+                    
+                    if fcost[node] > new_f:
+                        #If so, update the node to have a new parent 
+                        #And update the new G cost
+                        del fcost[node]
+                        fcost[node] = new_f
+                        del gcost[node]
+                        gcost[node]=gcost[curent] + self.cost(curent,node)
+                        del cameFrom[node]
+                        cameFrom[node]=curent
+                        #if the node is in closedset then you have to search again for the best path :(, so put it in the open set
+                        if node in closedset:
+                            closedset.remove(node)
+                            openset.add(node)
         #ani=self.vis.save_gif("new.gif") -------------------------------------------------------------------       
-        """for k in closedset:
-            
-            print(closedset)
-            self.exp.append(closedset)"""
+            openset.remove(curent)
+            closedset.add(curent)
         self.exp=len(closedset)
         
             
@@ -174,11 +173,15 @@ class Pathfinder:
         return self.exp
 import math
 
-"""## A heuristic
-def my_function(a, b):
+## A heuristic
+def manhatan(a, b):
     return abs(a[0] - b[0]) + abs(a[1] - b[1])
-def all_1(a,b):
+def all_cost_1(a,b):
     return 1
+def all_cost_0(a,b):
+  return 0
+def euclidean(a,b):
+  return math.sqrt(math.pow((a[0]-b[0]),2)+math.pow((a[1]-b[1]),2))
 ## Create a 41x41 maze
 N = 20
 S = (2, 2)
@@ -186,5 +189,5 @@ F = (18, 12)
 maze = project1part1.Maze(N, S, F)
 ## Find and visualize the path
 
-pf = Pathfinder(maze=maze, c = all_1, h = my_function)
-maze.draw_map(pf.get_path())"""
+pf = Pathfinder(maze=maze, c = all_cost_1, h = manhatan)
+maze.draw_map(pf.get_path())
