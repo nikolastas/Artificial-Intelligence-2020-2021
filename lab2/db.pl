@@ -120,30 +120,34 @@ language(X,L),
 language(Y,L),
 X \= Y.
 
-sim_color(X,Y):.
+sim_color(X,Y):-
+plot_keywords(X,"black and white"),
+plot_keywords(Y,"black and white"),
+X \= Y.
+sim_color(X,Y):-
+not(plot_keywords(X,"black and white")),
+(plot_keywords(Y,G1)),
+ G1 \= "black and white",
+X \= Y.
 
 sim_studio(X,Y):-
 production_companies(X,C1,_),
 production_companies(Y,C1,_),
 X \= Y.
 
-sim_studio(X,Y):-
+sim_count(X,Y):-
 production_countries(X,_,_,C1),
 production_countries(Y,_,_,C1),
 X \= Y.
 
 same_dec(X,Y):-
-title_year(X,G1),
-title_year(Y,G2),
-G11 is G1+10,
-G2 <= G11,
-G2 > G1,
-X \= Y.
-
-same_dec(X,Y):-
-title_year(X,G1),
-title_year(Y,G2),
-G11 is G1-10,
-G2 > G11,
-G2 <= G1,
-X \= Y.
+    title_year(X,L0),
+    atom_number(L0,L),
+    L1 is div(L,10),
+    L2 is L1*10,
+    title_year(Y,L6),
+    atom_number(L6,L3),
+    L3 >=L2,
+    L4 is (L2 + 9),
+    L3 =< L4,
+    X \= Y.
