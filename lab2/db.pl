@@ -1,41 +1,41 @@
 find_sim_1(X, Y):- 
-actor_sim(X, G1), 
-actor_sim(Y, G1), 
+genre(X, G1), 
+genre(Y, G1), 
 X \= Y.
 
 find_sim_3(X,Y):-
-actor_sim(X,G1),
-actor_sim(X,G2),
+genre(X,G1),
+genre(X,G2),
 G2 \= G1,
-actor_sim(X,G3),
+genre(X,G3),
 G3 \= G1,
 G3 \= G2,
-actor_sim(Y,G1),
-actor_sim(Y,G2),
-actor_sim(Y,G3),
+genre(Y,G1),
+genre(Y,G2),
+genre(Y,G3),
 X \= Y.
 
 find_sim_5(X,Y):-
-actor_sim(X,G1),
-actor_sim(X,G2),
+genre(X,G1),
+genre(X,G2),
 G2 \= G1,
-actor_sim(X,G3),
+genre(X,G3),
 G3 \= G1,
 G3 \= G2,
-actor_sim(X,G4),
+genre(X,G4),
 G4 \= G1,
 G4 \= G2,
 G4 \= G3,
-actor_sim(X,G5),
+genre(X,G5),
 G5 \= G1,
 G5 \= G2,
 G5 \= G3,
 G5 \= G4,
-actor_sim(Y,G1),
-actor_sim(Y,G2),
-actor_sim(Y,G3),
-actor_sim(Y,G4),
-actor_sim(Y,G5),
+genre(Y,G1),
+genre(Y,G2),
+genre(Y,G3),
+genre(Y,G4),
+genre(Y,G5),
 X \= Y.
 
 common_director(X,Y):-
@@ -151,3 +151,4 @@ same_dec(X,Y):-
     L4 is (L2 + 9),
     L3 =< L4,
     X \= Y.
+
