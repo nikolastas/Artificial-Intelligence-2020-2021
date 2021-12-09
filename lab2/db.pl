@@ -3,6 +3,14 @@ genre(X, G1),
 genre(Y, G1), 
 X \= Y.
 
+find_sim_2(X,Y):-
+genre(X,G1),
+genre(X,G2),
+G2 \= G1,
+genre(Y,G1),
+genre(Y,G2),
+X \= Y.
+
 find_sim_3(X,Y):-
 genre(X,G1),
 genre(X,G2),
@@ -13,6 +21,23 @@ G3 \= G2,
 genre(Y,G1),
 genre(Y,G2),
 genre(Y,G3),
+X \= Y.
+
+find_sim_4(X,Y):-
+genre(X,G1),
+genre(X,G2),
+G2 \= G1,
+genre(X,G3),
+G3 \= G1,
+G3 \= G2,
+genre(X,G4),
+G4 \= G1,
+G4 \= G2,
+G4 \= G3,
+genre(Y,G1),
+genre(Y,G2),
+genre(Y,G3),
+genre(Y,G4),
 X \= Y.
 
 find_sim_5(X,Y):-
@@ -79,8 +104,19 @@ plot_keywords(Y,G3),
 X \= Y.
 
 
+sim_plot_1(X,Y):-
+plot_keywords(X,G1),
+plot_keywords(Y,G1),
+X \= Y.
 
 
+sim_plot_2(X,Y):-
+plot_keywords(X,G1),
+plot_keywords(X,G2),
+G2 \= G1,
+plot_keywords(Y,G1),
+plot_keywords(Y,G2),
+X \= Y.
 
 sim_actor_base(X, Y):- 
 actor_1_name(X, G1), 
