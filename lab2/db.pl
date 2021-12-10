@@ -91,6 +91,23 @@ plot_keywords(Y,G4),
 plot_keywords(Y,G5),
 X \= Y.
 
+sim_plot_4(X,Y):-
+plot_keywords(X,G1),
+plot_keywords(X,G2),
+G2 \= G1,
+plot_keywords(X,G3),
+G3 \= G1,
+G3 \= G2,
+plot_keywords(X,G4),
+G4 \= G1,
+G4 \= G2,
+G4 \= G3,
+plot_keywords(Y,G1),
+plot_keywords(Y,G2),
+plot_keywords(Y,G3),
+plot_keywords(Y,G4),
+X \= Y.
+
 sim_plot_3(X,Y):-
 plot_keywords(X,G1),
 plot_keywords(X,G2),
