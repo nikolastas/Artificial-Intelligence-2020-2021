@@ -189,8 +189,13 @@ production_companies(Y,C1,_),
 X \= Y.
 
 sim_count(X,Y):-
-production_countries(X,_,_,C1),
-production_countries(Y,_,_,C1),
+production_countries(X,_,C1),
+production_countries(Y,_,C1),
+X \= Y.
+
+sim_spoken_lang(X,Y):-
+spoken_languages(X,_,L1),
+spoken_languages(Y,_,L1),
 X \= Y.
 
 same_dec(X,Y):-
