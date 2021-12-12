@@ -209,4 +209,4 @@ same_dec(X,Y):-
     L4 is (L2 + 9),
     L3 =< L4,
     X \= Y.
-
+% IMPORTANT: Decade-> 2000 - 2009
